@@ -4,25 +4,56 @@ import java.util.Hashtable;
 import javax.swing.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.*;
 
 public class BankBalances {
     public static void main(String[] args) {
-        Spend(400);
-        System.out.println("03/06/2020 Paycheck: " + calculatePaycheck(24.00, 18.00));
-        System.out.println("03/06/2020 Checking: " + StartChecking(1544.32));
-        // System.out.println("03/19/2020 Checking: " + EndChecking(endCheckingBalance));
+        Date today = Calendar.getInstance().getTime();
+        System.out.println("Today: " + today);
+        menu();
 
     }
-    private double StartCheckingBalance
+    private static void menu() {
+        System.out.println("WELCOME TO SCOTTBANK");
+        System.out.println("1 - Add purchase");
+        System.out.println("2 - Calculate a paycheck");
+        
+        Scanner scan = new Scanner(System.in);
+        Integer menu = scan.nextInt();
+        switch (menu) {
+            case 1:
+                Spend();
+            case 2:
+                calculatePaycheck();
+        }
+    }
 
-    private static String calculatePaycheck(double hours, double wage) {
+    private static String calculatePaycheck() {
         DecimalFormat df = new DecimalFormat("#.00");
-        double taxes = 0.165;
-        double taxedWage = taxes * 18.00;
-        double newWage = wage - taxedWage;
-        double toSavings = 100.00;
-        double pay = hours * newWage - toSavings;
-        String payFormatted = df.format(pay);
+        String payFormatted = "";
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Would you like to calculate a paycheck? y/n");
+        String response = scan.nextLine();
+        switch (response) {
+            case "y":
+                System.out.println("Hours: ");
+                double hours = scan.nextDouble();
+
+                System.out.println("Wage: ");
+                double wage = scan.nextDouble();
+
+                double taxes = 0.165;
+                double taxedWage = taxes * 18.00;
+                double newWage = wage - taxedWage;
+                double toSavings = 100.00;
+                double pay = hours * newWage - toSavings;
+                payFormatted = df.format(pay);
+                System.out.println("Paycheck: " + payFormatted);
+                break;
+            case "n":
+                System.out.println("Okay.");
+                break;
+        }
         return payFormatted;
     }
     // private static String StartChecking(double startCheckingBalance) {
@@ -33,7 +64,7 @@ public class BankBalances {
 
 
 
-    
+
     // private static String EndChecking(double endCheckingBalance) {
     //     Double EndBalance = StartChecking(1544.32) - Spend(100.00);
     //     DecimalFormat df = new DecimalFormat("#.00");
@@ -43,7 +74,7 @@ public class BankBalances {
     // public int getCurrCheckBal() {
     //     return StartChecking - Spend;
     // }
-    private static Double Spend(double spendingAmount) {
+    private static Double Spend() {
         ArrayList<Double> spendAmount = new ArrayList<Double>();
         Scanner scan = new Scanner(System.in);
         double sum = 0;
@@ -65,7 +96,7 @@ public class BankBalances {
         }
         for (Double purchases : spendAmount) {
                 sum += purchases;
-            }
+        }
         System.out.println(sum);
         return sum;
 
