@@ -10,34 +10,43 @@ public class BankBalances {
     public static void main(String[] args) {
         Date today = Calendar.getInstance().getTime();
         System.out.println("Today: " + today);
-        //restart = false;
         menu();
+            
     }
     private static void menu() {
         Scanner scan = new Scanner(System.in);
-        try {
-            System.out.println("WELCOME TO SCOTTBANK");
-            System.out.println("1 - Add purchase");
-            System.out.println("2 - Calculate a paycheck");
-            System.out.println("3 - Exit");
-            
-            
-            Integer menu = scan.nextInt();
-            switch (menu) {
-                case 1:
-                    Spend();
-                    break;
-                case 2:
-                    calculatePaycheck();
-                    break;
-                case 3:
-                    break;
+        boolean exit = false;
+        while (!exit) {
+            try {
+                System.out.println("WELCOME TO SCOTTBANK");
+                System.out.println("1 - Add purchase");
+                System.out.println("2 - Calculate a paycheck");
+                System.out.println("3 - Initialize Checking");
+                System.out.println("4 - Exit");
+                Integer menu = scan.nextInt();
+
+                switch (menu) {
+                    case 1:
+                        Spend();
+                        break;
+                    case 2:
+                        calculatePaycheck();
+                        break;
+                    case 3:
+                        InitalizeChecking();
+                        break;
+                    case 4:
+                        exit = true;
+                        if (scan != null)
+                            scan.close();
+                        break;
+                }
+            }
+            finally {
+                System.out.println("");
             }
         }
-        finally {
-            if (scan != null)
-                scan.close();
-        }
+        
     }
 
     private static String calculatePaycheck() {
@@ -58,19 +67,16 @@ public class BankBalances {
             double pay = hours * newWage - toSavings;
             payFormatted = df.format(pay);
             System.out.println("Paycheck: " + payFormatted);
-
-            scan.close();
             return payFormatted;
         }
+        
         finally {
-            if (scan != null)
-                scan.close();
+            System.out.println("");
         }
         
     }
     private static Double Spend() {
         ArrayList<Double> spendAmount = new ArrayList<Double>();
-        //Scanner scan = new Scanner(System.in);
         Scanner scan = new Scanner(System.in);
         try {
             double sum = 0;
@@ -85,14 +91,29 @@ public class BankBalances {
                     sum += purchases;
             }
 
-
-
-            System.out.println(sum);
+            // subtract sum from checking
+            double currBal = InitalizeChecking() - sum;
+            System.out.println("You just spent $" + sum);
+            System.out.println("Current Checking balance is $" + currBal);
             return sum;
+            
         }
         finally {
-            if (scan != null)
-                scan.close();
+                System.out.println("");
+            }
+    }
+
+    public static double InitalizeChecking() {
+        Scanner scan = new Scanner(System.in);
+        try {
+            System.out.println("Enter amount in Checking: ");
+            double startChecking = scan.nextInt();
+            
+            System.out.println("Your starting checking amount is $" + startChecking);
+            return startChecking;
+        }
+        finally {
+            System.out.println("");
         }
     }
 }
