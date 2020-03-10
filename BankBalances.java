@@ -1,12 +1,9 @@
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Hashtable;
 import javax.swing.*;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.*;
 import java.time.*;
-import java.time.temporal.TemporalAdjusters;
+import java.text.*;
+
+
 
 public class BankBalances {
     public static void main(String[] args) {
@@ -19,37 +16,24 @@ public class BankBalances {
         while (!exit) {
             try {
                 Date today = Calendar.getInstance().getTime();
-                System.out.println("Today: " + today);
+                System.out.println("\n\nToday: " + today);
                 System.out.println("WELCOME TO SCOTTBANK");
-                System.out.println("1 - Initialize Checking");
-                System.out.println("2 - Add purchase");
-                System.out.println("3 - Calculate a paycheck");
-                System.out.println("4 - Exit");
+                System.out.println("1 - Test purchases you want to make");
+                System.out.println("2 - Test purchases from calculated paycheck");
+                System.out.println("3 - Exit");
                 Integer menu = scan.nextInt();
 
                 switch (menu) {
                     case 1:
-                        InitalizeChecking();
+                        checkPurchase();
                         break;
                     case 2:
-                        addPurchase();
+                        checkPaycheckPurchases();
                         break;
                     case 3:
-                        calculatePaycheck();
-                        break;
-                    case 4:
                         exit = true;
                         if (scan != null)
                             scan.close();
-                        break;
-                    case 5:
-                        getPrevFriday();
-                        break;
-                    case 6:
-                        getNextFriday();
-                        break;
-                    case 7:
-                        paycheckWeek();
                         break;
                 }
             } finally {
@@ -57,53 +41,40 @@ public class BankBalances {
             }
         }
     }
-
-    public static double InitalizeChecking() {
-        Scanner scan = new Scanner(System.in);
-        try {
-            System.out.print("Enter amount in Checking: ");
-            double startChecking = scan.nextInt(); // stores user input to double startChecking
-
-            System.out.println("Your starting checking amount is $" + startChecking);
-            return startChecking;
-        } finally {
-            System.out.print("");
-        }
-    }
-
-    private static Double addPurchase() {
-        ArrayList<Double> spendAmount = new ArrayList<Double>();
+    private static Double checkPurchase() {
         Scanner scan = new Scanner(System.in);
         try {
             double sum = 0;
-            System.out.print("How many purchases would you like to add? ");
-            int NoOfPurchases = scan.nextInt();
-            /*
-             * done = false; while (done == false){
-             * System.out.print("How much was your purchase? "); Double currPur =
-             * scan.nextDouble(); if (currPur == done) done = true; }
-             */
-            for (int i = 0; i < NoOfPurchases; i++) {
-                System.out.print("How much was your purchase? ");
+            System.out.print("Enter amount in Checking: ");
+            double startChecking = scan.nextDouble(); // stores user input to double startChecking
+            System.out.println("Your starting checking amount is $" + startChecking);
+
+            ArrayList<Double> spendAmount = new ArrayList<Double>();
+            boolean exit = false;
+            while (!exit) {
+                // check if user input is "done"
+                System.out.print("Exit by '.123'. How much is your purchase? ");
                 Double currPur = scan.nextDouble();
+                if (currPur.equals(.123)) {
+                    exit = true;
+                }
                 spendAmount.add(currPur);
             }
             for (Double purchases : spendAmount) {
                 sum += purchases;
             }
-
             // subtract sum from checking
-            double currBal = InitalizeChecking() - sum;
-            System.out.println("You just spent $" + sum);
-            System.out.println("Current Checking balance is $" + currBal);
+            double subTotal = startChecking - sum;
+            System.out.println("\nYou will spend $" + sum);
+            System.out.println("You will have a balance of $" + subTotal);
             return sum;
-
-        } finally {
+        }
+        finally {
             System.out.print("");
         }
     }
 
-    private static String calculatePaycheck() {
+    private static String checkPaycheckPurchases() {
         Scanner scan = new Scanner(System.in);
         try {
             DecimalFormat df = new DecimalFormat("#.00");
@@ -115,10 +86,10 @@ public class BankBalances {
             double wage = scan.nextDouble();
 
             double taxes = 0.165;
-            double taxedWage = taxes * 18.00;
-            double newWage = wage - taxedWage;
+            double irs = taxes * wage;
+            double taxedWage = wage - irs;
             double toSavings = 100.00;
-            double pay = hours * newWage - toSavings;
+            double pay = hours * taxedWage - toSavings;
             payFormatted = df.format(pay);
             System.out.println("Paycheck: $" + payFormatted);
             return payFormatted;
@@ -126,18 +97,18 @@ public class BankBalances {
             System.out.print("");
         }
     }
-    public static void paycheckWeek() {
-        getPrevFriday();
-        getNextFriday();
-        System.out.println("");
-    }
+    // public static void paycheckWeek() {
+    //     getPrevFriday();
+    //     getNextFriday();
+    //     System.out.println("");
+    // }
 
-    public static void getPrevFriday() {
-        LocalDate dt = LocalDate.now();    
-        System.out.print("\nPrevious Friday: "+dt.with(TemporalAdjusters.previous(DayOfWeek.FRIDAY)));
-    }
-    public static void getNextFriday() {
-        LocalDate dt = LocalDate.now();    
-        System.out.print("\nNext Friday: "+dt.with(TemporalAdjusters.next(DayOfWeek.FRIDAY)));
-    }
+    // public static void getPrevFriday() {
+    //     LocalDate dt = LocalDate.now();    
+    //     System.out.print("\nPrevious Friday: "+ vdt.with(TemporalAdjusters.previous(DayOfWeek.FRIDAY)));
+    // }
+    // public static void getNextFriday() {
+    //     LocalDate dt = LocalDate.now();
+    //     System.out.print("\nNext Friday: "+ vdt.with(TemporalAdjusters.next(DayOfWeek.FRIDAY)));
+    // }
 }
