@@ -39,23 +39,14 @@ public class BankBalances {
             }
         }
     }
-    public static Double startAmount() {
-        Scanner scan = new Scanner(System.in);
-        double startingAmount = 0.00;
-        System.out.print("\nEnter starting amount: $");
-        startingAmount = scan.nextDouble(); // stores user input to double startChecking
-        System.out.println("Your starting amount is $" + currencyFormat(startingAmount));
-        return startingAmount;
-    }
     private static Double checkPurchase() {
         Scanner scan = new Scanner(System.in);
+        double startAmount = 0.00;
         try {
             double sum = 0;
-            // startAmount();
-            double startingAmount = 0.00;
-            System.out.print("\nEnter starting amount: $");
-            startingAmount = scan.nextDouble(); // stores user input to double startChecking
-            System.out.println("Your starting amount is $" + currencyFormat(startingAmount));
+            System.out.print("\nHow much is in your checking account? $");
+            startAmount = scan.nextDouble(); // stores user input to double startChecking
+            System.out.println("Your starting amount is $" + currencyFormat(startAmount));
             System.out.println("\n***Tip: Exit by '.000'.");
             // sleep
             try { TimeUnit.SECONDS.sleep(1);
@@ -76,8 +67,7 @@ public class BankBalances {
                 sum += purchases;
             }
             // subtract sum from checking
-            //double initialAmount = startingAmount.startAmount();
-            double subTotal = startingAmount - sum;
+            double subTotal = startAmount - sum;
             System.out.println("\nYou will spend $" + currencyFormat(sum));
             // sleep
             try { TimeUnit.SECONDS.sleep(1);
@@ -98,15 +88,13 @@ public class BankBalances {
     private static String checkPaycheckPurchases() {
         Scanner scan = new Scanner(System.in);
         try {
-            double sum = 0;
-            double startingAmount = 0.00;
-            System.out.print("\nEnter starting amount: $");
-            startingAmount = scan.nextDouble(); // stores user input to double startChecking
-            System.out.println("Your starting amount is $" + currencyFormat(startingAmount));
-
             String payFormatted = "";
             System.out.print("Weekly (1), or bi-weekly (2)? ");
             int payResponse = scan.nextInt();
+
+            System.out.print("\nHow much is in your checking account? $");
+            startAmount = scan.nextDouble(); // stores user input to double startChecking
+                        System.out.println("Your starting amount is $" + currencyFormat(startAmount));
 
             System.out.print("Hourly wage: $");
             double wage = scan.nextDouble();
@@ -131,66 +119,56 @@ public class BankBalances {
                     double biweeklyhours = hours + secondHours;
                     double biWeeklyPay = biweeklyhours * taxedWage - toSavings;
                     System.out.println("\nYour bi-weekly paycheck is $" + currencyFormat(biWeeklyPay));
-                    double newTotal = biWeeklyPay + startingAmount;
-                    System.out.println("\nWhen you get your paycheck, you'll have $" + newTotal + " in the bank when your paycheck arrives.");
-                    
-                    System.out.println("\n***Tip: Exit by '.000'.");
-                    // sleep
-                    try { TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException e){
-                        System.out.println("No sleep");}
+                    double startAmount = 0.00;
+                    try {
+                        double sum = 0;
+                        System.out.println("\n***Tip: Exit by '.000'.");
+                        // sleep
+                        try { TimeUnit.SECONDS.sleep(1);
+                        } catch (InterruptedException e){
+                            System.out.println("No sleep");}
 
-                    ArrayList<Double> spendAmount = new ArrayList<Double>();
-                    boolean exit = false;
-                    while (!exit) { // repeats
-                        System.out.print("How much is your purchase? $");
-                        Double currPur = scan.nextDouble();
-                        if (currPur.equals(.000)) {
-                            exit = true;
+                        ArrayList<Double> spendAmount = new ArrayList<Double>();
+                        boolean exit = false;
+                        while (!exit) { // repeats
+                            System.out.print("How much is your purchase? $");
+                            Double currPur = scan.nextDouble();
+                            if (currPur.equals(.000)) {
+                                exit = true;
+                            }
+                            spendAmount.add(currPur);
                         }
-                        spendAmount.add(currPur);
-                    }
-                    for (Double purchases : spendAmount) {
-                        sum += purchases;
-                    }
-                    // subtract sum from checking
-                    //double initialAmount = startingAmount.startAmount();
-                    double subTotal = newTotal - sum;
-                    System.out.println("\nYou will spend $" + currencyFormat(sum));
-                    // sleep
-                    try { TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException e){
-                        System.out.println("No sleep");}
+                        for (Double purchases : spendAmount) {
+                            sum += purchases;
+                        }
+                        // subtract sum from checking
+                        double subTotal = startAmount - sum;
+                        System.out.println("\nYou will spend $" + currencyFormat(sum));
+                        // sleep
+                        try { TimeUnit.SECONDS.sleep(1);
+                        } catch (InterruptedException e){
+                            System.out.println("No sleep");}
 
-                    System.out.println("You will have a remaining balance of $" + currencyFormat(subTotal));
-                    // sleep
-                    try { TimeUnit.SECONDS.sleep(3);
-                    } catch (InterruptedException e){
-                        System.out.println("No sleep");}
-                    break;
-                default:
-                    System.out.println("You did not select 1 or 2.");
-                    break;
-            }
-            return payFormatted;
-        } finally {
-            System.out.print("");
-        }
+                        System.out.println("You will have a remaining balance of $" + currencyFormat(subTotal));
+                        // sleep
+                        try { TimeUnit.SECONDS.sleep(3);
+                        } catch (InterruptedException e){
+                            System.out.println("No sleep");}
+                        return sum;
+                    }
+                    finally {
+                        System.out.print("");
+                    }
+                                break;
+                            default:
+                                System.out.println("You did not select 1 or 2.");
+                                break;
+                        }
+                        return payFormatted;
+                    } finally {
+                        System.out.print("");
+                    }
     }
-    // public static void paycheckWeek() {
-    //     getPrevFriday();
-    //     getNextFriday();
-    //     System.out.println("");
-    // }
-
-    // public static void getPrevFriday() {
-    //     LocalDate dt = LocalDate.now();    
-    //     System.out.print("\nPrevious Friday: "+ vdt.with(TemporalAdjusters.previous(DayOfWeek.FRIDAY)));
-    // }
-    // public static void getNextFriday() {
-    //     LocalDate dt = LocalDate.now();
-    //     System.out.print("\nNext Friday: "+ vdt.with(TemporalAdjusters.next(DayOfWeek.FRIDAY)));
-    // }
     private static String currencyFormat(Double num) {
         DecimalFormat df = new DecimalFormat("#.00");
         String newestFormatted = df.format(num);
