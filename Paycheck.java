@@ -38,7 +38,7 @@ public class Paycheck {
     protected Double setHourlyPaycheck() {
         hourlyWage = wage.getHourly();
         key = tax.getFilingStatus();
-        incomeTax = tax.CalculateIncomeTaxHourly(key);
+        incomeTax = tax.CalculateIncomeTaxHourly(key, hourlyWage);
         totalHours = hours.getTotalHours();
         calculatedPaycheck = hourlyWage * incomeTax * totalHours;
         System.out.println("\nAs a hourly employee, your paycheck will be $" + calculatedPaycheck + ".");

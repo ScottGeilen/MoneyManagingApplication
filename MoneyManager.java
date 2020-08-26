@@ -16,11 +16,14 @@ public class MoneyManager {
         Scanner scan = new Scanner(System.in);
         boolean exit = false;
         Tax tax = new Tax();
+        Wage wage = new Wage();
+        Compensation employee = new Compensation();
+        Paycheck paycheck = new Paycheck();
+        double hourlyWage;
+        double salary;
 
         while (!exit) {
             int key;
-            Compensation employee = new Compensation();
-            Paycheck paycheck = new Paycheck();
             try {
                 Date today = Calendar.getInstance().getTime();
                 System.out.println("\n\nToday is " + today);
@@ -33,7 +36,8 @@ public class MoneyManager {
                 System.out.println("6 - setSalaryPaycheck");
                 System.out.println("7 - setHourlyPaycheck");
                 System.out.println("8 - CalculateIncomeTaxHourly");
-                System.out.println("9 - Exit");
+                System.out.println("9 - CalculateIncomeTaxSalary");
+                System.out.println("10 - Exit");
                 int menu = scan.nextInt();
                 switch (menu) {
                     case 1:
@@ -58,13 +62,16 @@ public class MoneyManager {
                         paycheck.setHourlyPaycheck();
                         break;
                     case 8:
+                        hourlyWage = wage.getHourly();
                         key = tax.getFilingStatus();
-                        tax.CalculateIncomeTaxHourly(key);
+                        tax.CalculateIncomeTaxHourly(key, hourlyWage);
                         break;
-                        //         case 5:
-                        //             checkPurchase();
-                        //             break;
                     case 9:
+                        salary = wage.getSalary();
+                        key = tax.getFilingStatus();
+                        tax.CalculateIncomeTaxSalary(key, salary);
+                        break;
+                    case 10:
                         if (scan != null)
                             scan.close();
                         exit = true;
