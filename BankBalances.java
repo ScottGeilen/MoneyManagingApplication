@@ -24,8 +24,7 @@ public class BankBalances {
                 System.out.println("3 - Test purchases you want to make");
                 System.out.println("4 - Exit");
                 System.out.println("5 - salary income tax");
-                Integer menu = scan.nextInt();
-
+                int menu = scan.nextInt();
                 switch (menu) {
                     case 1:
                         calculatePaycheck();
