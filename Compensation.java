@@ -55,8 +55,7 @@ public class Compensation {
                 totalHours = hoursFirstWeek;
                 break;
         }
-        
-        System.out.print("Total hours: " + totalHours);
+        System.out.print("Your total work hours are " + totalHours);
         return totalHours;
     }
 }

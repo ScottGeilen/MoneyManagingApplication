@@ -20,7 +20,7 @@ public class Wage {
         return salary;
     }
     protected double setSalary(double yearly) {
-        return this.yearly;
+        return this.salary;
     }
     
     protected double getHourly() {

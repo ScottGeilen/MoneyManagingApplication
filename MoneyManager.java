@@ -15,32 +15,35 @@ public class MoneyManager {
     public static void menu() {
         Scanner scan = new Scanner(System.in);
         boolean exit = false;
+        Tax tax = new Tax();
 
         while (!exit) {
+            int key;
             Compensation employee = new Compensation();
             Paycheck paycheck = new Paycheck();
             try {
                 Date today = Calendar.getInstance().getTime();
                 System.out.println("\n\nToday is " + today);
                 System.out.println("WELCOME TO SCOTTBANK");
-                System.out.println("1 - get Total Hours");
-                System.out.println("2 - setSalaryPaycheck");
-                System.out.println("3 - calculatePaycheck");
+                System.out.println("1 - *getTotalHours");
+                System.out.println("2 - *Calculate paycheck");
+                System.out.println("3 - setSalaryPaycheck");
                 System.out.println("4 - checkPaycheckPurchases");
                 System.out.println("5 - checkPurchase");
                 System.out.println("6 - setSalaryPaycheck");
                 System.out.println("7 - setHourlyPaycheck");
-                System.out.println("8 - Exit");
+                System.out.println("8 - CalculateIncomeTaxHourly");
+                System.out.println("9 - Exit");
                 int menu = scan.nextInt();
                 switch (menu) {
                     case 1:
                         employee.getTotalHours();
                         break;
                     case 2:
-                        paycheck.setSalaryPaycheck();
+                        paycheck.calculatePaycheck();
                         break;
                     case 3:
-                        paycheck.calculatePaycheck();
+                        paycheck.setSalaryPaycheck();
                         break;
                     case 4:
                         checkPaycheckPurchases();
@@ -54,13 +57,14 @@ public class MoneyManager {
                     case 7:
                         paycheck.setHourlyPaycheck();
                         break;
-                        //     case 5:
-                        //         checkPurchase();
-                        //         break;
+                    case 8:
+                        key = tax.getFilingStatus();
+                        tax.CalculateIncomeTaxHourly(key);
+                        break;
                         //         case 5:
                         //             checkPurchase();
                         //             break;
-                    case 8:
+                    case 9:
                         if (scan != null)
                             scan.close();
                         exit = true;

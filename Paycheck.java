@@ -22,25 +22,31 @@ public class Paycheck {
     protected int key;
 
     protected Double setSalaryPaycheck() {
+        // hours
+        totalHours = hours.getTotalHours();
+        // salary
+        salary = wage.getSalary();
+        // filing status for tax
         key = tax.getFilingStatus();
         incomeTax = tax.CalculateIncomeTaxSalary(key);
         
-        calculatedPaycheck = incomeTax * salary; // incomeTax * salary
-        System.out.println("As a salary employee, your paycheck will be $" + calculatedPaycheck + ".");
+        calculatedPaycheck = incomeTax * salary / totalHours;
+        System.out.println("\nAs a salary employee, your paycheck will be $" + calculatedPaycheck + ".");
         return calculatedPaycheck;
     }
 
     protected Double setHourlyPaycheck() {
+        hourlyWage = wage.getHourly();
         key = tax.getFilingStatus();
         incomeTax = tax.CalculateIncomeTaxHourly(key);
         totalHours = hours.getTotalHours();
         calculatedPaycheck = hourlyWage * incomeTax * totalHours;
-        System.out.println("As a hourly employee, your paycheck will be $" + calculatedPaycheck + ".");
+        System.out.println("\nAs a hourly employee, your paycheck will be $" + calculatedPaycheck + ".");
         return calculatedPaycheck;
     }
     protected Double calculatePaycheck() {
         try {
-            System.out.print("Are you on salary, or hourly?\n1. Salary\n2. Hourly\n: ");
+            System.out.print("\nAre you on salary, or hourly?\n1. Salary\n2. Hourly\n: ");
             EmployeeType = scan.nextInt();
             switch (EmployeeType) {
                 case 1:   

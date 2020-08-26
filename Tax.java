@@ -14,6 +14,7 @@ public class Tax {
     protected double salary;
     protected int filingKey;
     protected double totalHours;
+    protected double hourlyWage;
 
     Compensation hours = new Compensation();
     Wage wage = new Wage();
@@ -25,9 +26,9 @@ public class Tax {
     }
 
     protected double CalculateIncomeTaxHourly(int filingKey) {
+        hourlyWage = wage.getHourly();
         totalHours = hours.getTotalHours();
-        salary = totalHours * 12;
-        incomeTax = 0.00;
+        salary = hourlyWage * 40 * 52;
         switch (filingKey) {
             case 1:
                 if (salary < 9700) {
