@@ -12,53 +12,148 @@ public class Paycheck {
     Tax tax = new Tax();
     Compensation hours = new Compensation();
     Wage wage = new Wage();
+    MoneyManager money = new MoneyManager();
+    ArrayList<Double> spendAmount = new ArrayList<Double>();
 
     protected double incomeTax;
     protected double hourlyWage;
-    protected double calculatedPaycheck;
     protected double totalHours;
     protected double salary;
     protected int EmployeeType;
     protected int key;
+    protected double subTotal;
+    protected double paycheck;
+    protected double sum;
+    protected double spending;
+    protected double startingAmount;
+    protected double subtotalPaycheck;
+    protected double calculatedPaycheck;
+    protected double calculatedPaycheckTax;
+    protected double toSavings;
+    protected String payFrequency;
+    protected Double currPur;
+    protected boolean exit = false;
+    protected String payFormatted = "";
 
-    protected Double setSalaryPaycheck() {
-        // hours
-        totalHours = hours.getTotalHours();
-        // salary
+    protected Double calculateSalaryPaycheck() {
         salary = wage.getSalary();
-        // filing status for tax
+        totalHours = hours.getTotalHours();
+
         key = tax.getFilingStatus();
-        incomeTax = tax.CalculateIncomeTaxSalary(key);
-        
-        calculatedPaycheck = incomeTax * salary / totalHours;
-        System.out.println("\nAs a salary employee, your paycheck will be $" + calculatedPaycheck + ".");
+        incomeTax = tax.calculateIncomeTax(key, salary);
+        switch (hours.PayFrequency) {
+            case 1:
+                payFrequency = "Monthly";
+                subtotalPaycheck = salary / 12;
+                break;
+            case 2:
+                payFrequency = "SemiMonthly";
+                subtotalPaycheck = salary / 24;
+                break;
+            case 3:
+                payFrequency = "BiWeekly";
+                subtotalPaycheck = salary / 26;
+                break;
+            case 4:
+                payFrequency = "Weekly";
+                subtotalPaycheck = salary / 52;
+                break;
+            default:
+                System.out.println("Error");
+                break;
+        }
+        calculatedPaycheckTax = subtotalPaycheck * incomeTax;
+        calculatedPaycheck = subtotalPaycheck - calculatedPaycheckTax;
+
+        System.out.println("\nAs a salaried employee:");
+        System.out.println("- Your " + payFrequency + " paycheck before tax will be $" + money.currencyFormat(subtotalPaycheck));
+        System.out.println("- Your " + payFrequency + " paycheck tax is $" + money.currencyFormat(calculatedPaycheckTax));
+        System.out.println("- Your " + payFrequency + " paycheck after tax will be $" + money.currencyFormat(calculatedPaycheck));
         return calculatedPaycheck;
     }
 
-    protected Double setHourlyPaycheck() {
+    protected Double calculateHourlyPaycheck() {
         hourlyWage = wage.getHourly();
-        key = tax.getFilingStatus();
-        incomeTax = tax.CalculateIncomeTaxHourly(key, hourlyWage);
         totalHours = hours.getTotalHours();
-        calculatedPaycheck = hourlyWage * incomeTax * totalHours;
-        System.out.println("\nAs a hourly employee, your paycheck will be $" + calculatedPaycheck + ".");
+        
+        key = tax.getFilingStatus();
+        salary = tax.calculateSalary(hourlyWage, totalHours);
+        incomeTax = tax.calculateIncomeTax(key, salary);
+        
+        subtotalPaycheck = hourlyWage * totalHours;
+        calculatedPaycheckTax = subtotalPaycheck * incomeTax;
+        calculatedPaycheck = subtotalPaycheck - calculatedPaycheckTax;
+
+        System.out.println("\nAs an hourly employee:");
+        System.out.println("- Your paycheck before tax will be $" + money.currencyFormat(subtotalPaycheck));
+        System.out.println("- Your paycheck tax is $" + money.currencyFormat(calculatedPaycheckTax));
+        System.out.println("- Your paycheck after tax will be $" + money.currencyFormat(calculatedPaycheck));
         return calculatedPaycheck;
     }
     protected Double calculatePaycheck() {
         try {
-            System.out.print("\nAre you on salary, or hourly?\n1. Salary\n2. Hourly\n: ");
+            System.out.print("\nCALCULATE NEXT PAYCHECK.\nWhich employee type are you?\n1. Salary\n2. Hourly\n: ");
             EmployeeType = scan.nextInt();
             switch (EmployeeType) {
                 case 1:   
-                    setSalaryPaycheck();
+                    calculateSalaryPaycheck();
                     break;
                 case 2: 
-                    setHourlyPaycheck();
+                    calculateHourlyPaycheck();
+                    break;
             }
         } catch (Exception e) {
             System.out.println("Error");
         } finally {
             System.out.print("");
         } return (0.00);
+    }
+
+    protected String calculatePaycheckPurchases() {
+        try {
+            //System.out.print("How much to put away for savings?\n: ");
+            //toSavings = scan.nextDouble();
+            paycheck = calculatePaycheck();
+            addSpending();
+            return payFormatted;
+        } finally {
+            System.out.print("");
+        }
+    }
+    protected Double addSpending() {
+        try {
+            startingAmount = startAmount();
+            System.out.println("\n***Tip: Exit by '.000'.");
+            while (!exit) {
+                System.out.print("How much is your purchase? $");
+                currPur = scan.nextDouble();
+                if (currPur.equals(.000)) {
+                    exit = true;
+                }
+                spendAmount.add(currPur);
+            }
+            for (Double purchases : spendAmount) {
+                sum += purchases;
+            }
+            subTotal = startingAmount - sum;
+            System.out.println("\nYou will spend $" + money.currencyFormat(sum));
+            System.out.println("You will have a remaining balance of $" + money.currencyFormat(subTotal));
+            return sum;
+        }
+        finally {
+            System.out.print("");
+        }
+    }
+    protected Double startAmount() {
+        try {
+            System.out.print("\nWhat is your starting amount?\n: $");
+            startingAmount = scan.nextDouble();
+            System.out.println("Your starting amount is $" + money.currencyFormat(startingAmount));
+        } catch (Exception e) {
+            System.out.println("Error");
+        } finally {
+            System.out.println("");
+        }
+        return startingAmount;
     }
 }

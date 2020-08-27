@@ -17,7 +17,7 @@ public class Compensation {
     protected int PayFrequency;
 
     protected Double getTotalHours() {
-        System.out.print("What is your pay frequency?\n1. Monthly\n2. SemiMonthly\n3. BiWeekly\n4. Weekly\n: ");
+        System.out.print("\nWhat is your pay frequency?\n1. Monthly\n2. SemiMonthly\n3. BiWeekly\n4. Weekly\n: ");
         PayFrequency = scan.nextInt();
         totalHours = setTotalHours(PayFrequency);
         return totalHours;
@@ -25,7 +25,7 @@ public class Compensation {
     protected Double setTotalHours(int PayFrequency) {
         switch (PayFrequency) {
             case 1:
-                System.out.print("Monthly paychecks.\nFirst week hours: ");
+                System.out.print("\nMonthly paychecks.\nFirst week hours: ");
                 hoursFirstWeek = scan.nextDouble();
                 System.out.print("Second week hours: ");
                 hoursSecondWeek = scan.nextDouble();
@@ -36,26 +36,26 @@ public class Compensation {
                 totalHours = hoursFirstWeek + hoursSecondWeek + hoursThirdWeek + hoursFourthWeek;
                 break;
             case 2:
-                System.out.print("SemiMonthly paychecks.\nFirst week hours: ");
+                System.out.print("\nSemiMonthly paychecks.\nFirst week hours: ");
                 hoursFirstWeek = scan.nextDouble();
                 System.out.print("Second week hours: ");
                 hoursSecondWeek = scan.nextDouble();
                 totalHours = hoursFirstWeek + hoursSecondWeek;
                 break;
             case 3:
-                System.out.print("BiWeekly paychecks.\nFirst week hours: ");
+                System.out.print("\nBiWeekly paychecks.\nFirst week hours: ");
                 hoursFirstWeek = scan.nextDouble();
                 System.out.print("Second week hours: ");
                 hoursSecondWeek = scan.nextDouble();
                 totalHours = hoursFirstWeek + hoursSecondWeek;
                 break;
             case 4:
-                System.out.print("Weekly paychecks.\nTotal week hours: ");
+                System.out.print("\nWeekly paychecks.\nTotal week hours: ");
                 hoursFirstWeek = scan.nextDouble();
                 totalHours = hoursFirstWeek;
                 break;
         }
-        System.out.print("Your total work hours are " + totalHours);
+        System.out.println("Your total work hours are " + totalHours);
         return totalHours;
     }
 }

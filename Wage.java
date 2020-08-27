@@ -16,7 +16,7 @@ public class Wage {
     MoneyManager money = new MoneyManager();
     
     protected double getSalary() {
-        System.out.println("What is your salary wage?\n: ");
+        System.out.print("\nWhat is your salary wage?\n: $");
         salary = scan.nextDouble();
         salary = setSalary(salary);
         System.out.println("Your salary is $" + money.currencyFormat(salary));
@@ -27,8 +27,9 @@ public class Wage {
     }
     
     protected double getHourly() {
-        System.out.print("What is your hourly wage?\n: ");
+        System.out.print("\nWhat is your hourly wage?\n: $");
         hourly = scan.nextDouble();
+        System.out.print("Your hourly wage is $" + money.currencyFormat(hourly));
         return hourly;
     }
 }
