@@ -102,6 +102,7 @@ public class Paycheck {
                     calculateHourlyPaycheck();
                     break;
             }
+            return calculatedPaycheck;
         } catch (Exception e) {
             System.out.println("Error");
         } finally {

@@ -19,6 +19,7 @@ public class MoneyManager {
         Wage wage = new Wage();
         Compensation employee = new Compensation();
         Paycheck paycheck = new Paycheck();
+        Budget budget = new Budget();
         double hourlyWage;
         double salary;
 
@@ -31,6 +32,7 @@ public class MoneyManager {
                 System.out.println("1 - Calculate paycheck");
                 System.out.println("2 - Input spending from calculated paycheck");
                 System.out.println("3 - Input spending from start amount");
+                System.out.println("4 - Collect budget percentages");
                 System.out.println("10 - Exit");
                 int menu = scan.nextInt();
                 switch (menu) {
@@ -42,6 +44,9 @@ public class MoneyManager {
                         break;
                     case 3:
                         paycheck.addSpending();
+                        break;
+                    case 4:
+                        budget.collectBudgetPercentages();
                         break;
                     case 10:
                         if (scan != null)
