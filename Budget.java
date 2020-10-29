@@ -23,42 +23,47 @@ public class Budget {
     protected double realPercent;
     protected double budgetOfPaycheck;
     protected double paycheckLeft;
+    protected double budgetMoney;
 
-    protected String collectBudgetPercentages() {
+    protected String collectBudget() {
         try {
             calculatedPaycheck = paycheck.calculatePaycheck();
+            paycheckLeft = calculatedPaycheck;
             System.out.println("\n***Tip: Exit by '.000'.");
-            while (percentageLeft != 0) {
-                if (paycheckLeft == 0) {
-                    System.out.println("You have "+percentageLeft+"% or $" + money.currencyFormat(calculatedPaycheck) + " left to budget.");
+            while (paycheckLeft > 0.0) {
+                if (paycheckLeft == 0.0) {
+                    System.out.println("You have $"+money.currencyFormat(calculatedPaycheck)+" left to budget.");
                 } else {
-                    System.out.println("You have "+percentageLeft+"% or $" + money.currencyFormat(paycheckLeft) + " left.");
-                }
-
-                System.out.print("Budget category: ");
-                budgetCategory = scan.nextLine();
-                if (budgetList.containsKey(budgetCategory) == false) {
-                    System.out.print("Budget percentage: ");
-                    while (true) {
-                        try {
-                            budgetPercentage = scan.nextDouble();
-                            break;
-                        } catch (NumberFormatException ignore) {
-                            System.out.print("Please input budget percentage.");
-                        }
-                    }
-                    budgetList.put(budgetCategory, budgetPercentage);
-                    percentageLeft -= budgetPercentage;
-                    realPercent = budgetPercentage / 100;
-                    budgetOfPaycheck = realPercent * calculatedPaycheck;
-                    paycheckLeft = calculatedPaycheck - budgetOfPaycheck;
-                    System.out.println("You will allocate "+budgetPercentage+"% or $"+money.currencyFormat(budgetOfPaycheck)+" for "+ budgetCategory);
-                    scan.nextLine();
-                    if (percentageLeft == 0) {
+                    if (paycheckLeft == 0) {
                         exit = true;
                     }
+                    System.out.println("You have $"+money.currencyFormat(paycheckLeft)+" left.");
+                    System.out.print("Budget category: ");
+                    budgetCategory = scan.nextLine();
+                    if (budgetList.containsKey(budgetCategory) == false) {
+                        System.out.print("Budget amount: $");
+                        while (true) {
+                            try {
+                                budgetMoney = scan.nextDouble();
+                                break;
+                            } catch (NumberFormatException ignore) {
+                                System.out.print("Please input budget percentage.");
+                            }
+                        }
+                        budgetList.put(budgetCategory, budgetMoney);
+                        paycheckLeft -= budgetMoney;
+                        //percentageLeft -= budgetPercentage;
+                        //realPercent = budgetPercentage / 100;
+                        //budgetOfPaycheck = realPercent * calculatedPaycheck;
+                        //paycheckLeft = calculatedPaycheck - budgetOfPaycheck;//"+budgetPercentage+"% or
+                        System.out.println("You will allocate $"+money.currencyFormat(budgetMoney)+" for "+ budgetCategory);
+                        scan.nextLine();
+                        if (paycheckLeft == 0) {
+                            exit = true;
+                        }
+                    }
                 }
-            }
+                }
             // for (Map.Entry<String, Double> budgetList : budgetList.entrySet()) {
             //     System.out.println("\n" + budgetList.getKey() + " " + budgetList.getValue());
             // }
@@ -66,10 +71,11 @@ public class Budget {
         finally {
             System.out.print("");
         }
-        System.out.println("Your budget consists of:");
+        System.out.println("\nWith a total paycheck of $" + money.currencyFormat(calculatedPaycheck)+",");
+        System.out.println("your budget consists of:");
         for (Map.Entry<String, Double> e : budgetList.entrySet()) {
-            System.out.println("Category:" + e.getKey() + "%");
-            System.out.println("Percentage:" + e.getValue() + "%");
+            System.out.println("Category: " + e.getKey());
+            System.out.println("Amount: $" + e.getValue());
         }
         return budgetCategory;
     }

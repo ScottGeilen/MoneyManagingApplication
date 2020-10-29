@@ -46,7 +46,7 @@ public class MoneyManager {
                         paycheck.addSpending();
                         break;
                     case 4:
-                        budget.collectBudgetPercentages();
+                        budget.collectBudget();
                         break;
                     case 10:
                         if (scan != null)
