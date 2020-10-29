@@ -1,12 +1,4 @@
-import javax.swing.*;
 import java.util.*;
-import java.time.*;
-import java.text.*;
-import java.lang.reflect.*;
-import java.util.concurrent.TimeUnit;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
 
 public class Wage {
     Scanner scan = new Scanner(System.in);

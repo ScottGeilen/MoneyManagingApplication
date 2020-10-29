@@ -14,7 +14,14 @@ public class Paycheck {
     Wage wage = new Wage();
     MoneyManager money = new MoneyManager();
     ArrayList<Double> spendAmount = new ArrayList<Double>();
+    List<List<String>> rows = Arrays.asList(
+        Arrays.asList("Employee Type"),
+        Arrays.asList("Wage"),
+        Arrays.asList("Hours"),
+        Arrays.asList("Paycheck")
+        );
 
+    //FileWriter csvWriter = new FileWriter("budget.csv");
     protected double incomeTax;
     protected double hourlyWage;
     protected double totalHours;
@@ -37,6 +44,7 @@ public class Paycheck {
 
     protected Double calculateSalaryPaycheck() {
         salary = wage.getSalary();
+        //csvWriter.append(salary);
         totalHours = hours.getTotalHours();
 
         key = tax.getFilingStatus();

@@ -4,9 +4,11 @@ $ java BankBalances
 <br>
 Today is Tue Mar 10 15:20:16 EDT 2020<br>
 WELCOME TO SCOTTBANK<br>
-1 - Test purchases you want to make<br>
-2 - Test purchases from calculated paycheck<br>
-3 - Exit<br>
+1 - Calculate paychecke<br>
+2 - Input spending from calculated paycheck<br>
+3 - Input spending from start amount<br>
+4 - Collect budget percentages<br>
+10 - Exit<br>
 2<br>
 Weekly (1), or bi-weekly (2)? 2<br>
 Hourly wage: $60<br>

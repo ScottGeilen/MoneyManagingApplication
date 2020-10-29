@@ -59,7 +59,7 @@ public class MoneyManager {
             }
         }
     }   
-    protected static String currencyFormat(Double num) {
+    protected String currencyFormat(Double num) {
         DecimalFormat df = new DecimalFormat("#,###.00");
         String newestFormatted = df.format(num);
         return newestFormatted;
