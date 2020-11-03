@@ -73,7 +73,7 @@ public class Paycheck {
         calculatedPaycheckTax = subtotalPaycheck * incomeTax;
         calculatedPaycheck = subtotalPaycheck - calculatedPaycheckTax;
         try {
-            FileWriter writer = new FileWriter("C:\\Users\\scott\\code\\projectslaptop02252020\\MoneyManagingApp\\paycheck.txt");
+            FileWriter writer = new FileWriter("C:\\Users\\scott\\code\\projectslaptop02252020\\MoneyManagingApp\\docs\\paycheck.txt");
             
             writer.write(payFrequency);
             writer.write("\nPaycheck frequency: " + payFrequency);
