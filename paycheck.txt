@@ -1,6 +1,0 @@
-BiWeekly
-Paycheck frequency: BiWeekly
-Paycheck before tax: 2,500.00
-Income tax: 0.22
-Paycheck tax: 550.00
-Paycheck after tax1,950.00
