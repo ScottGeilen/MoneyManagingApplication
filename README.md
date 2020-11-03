@@ -7,12 +7,11 @@ WELCOME TO SCOTTBANK<br>
 1 - Calculate paycheck<br>
 2 - Input spending from calculated paycheck<br>
 3 - Input spending from start amount<br>
-4 - Collect budget percentages<br>
+4 - Calculate budget<br>
 10 - Exit<br>
 
-# 1<br>
-<br>
-## CALCULATE NEXT PAYCHECK.<br>
+
+# 1 - CALCULATE NEXT PAYCHECK.<br>
 Which employee type are you?<br>
 1. Salary<br>
 2. Hourly<br>
@@ -40,14 +39,15 @@ What is your filing status?<br>
 3. Head of Household<br>
 : 1<br>
 1<br>
-Single.Your income tax is about 22.0%.<br>
+Single. Your income tax is about 22.0%.<br>
 <br>
 As a salaried employee:<br>
 - Your BiWeekly paycheck before tax will be $2,307.69<br>
 - Your BiWeekly paycheck tax is $507.69<br>
 - Your BiWeekly paycheck after tax will be $1,800.00<br>
-<br>
-# 2<br>
+
+
+# 2 - Input spending from calculated paycheck<br>
 Weekly (1), or bi-weekly (2)? 2<br>
 Hourly wage: $60<br>
 First week hours: 40<br>
@@ -67,9 +67,22 @@ How much is your purchase? $.123<br>
 <br>
 You will spend $1250.08<br>
 You will have a balance of $3749.92<br>
-<br>
-# 4<br>
-<br>
+
+
+# 3 - Input spending from start amount<br>
+What is your starting amount?
+: $1000
+Your starting amount is $1,000.00
+
+***Tip: Exit by '.000'.
+How much is your purchase? $500  
+How much is your purchase? $200
+How much is your purchase? $.00
+
+You will spend $700.00
+You will have a remaining balance of $300.00
+
+# 4 - Calculate budget<br>
 CALCULATE NEXT PAYCHECK.<br>
 Which employee type are you?<br>
 1. Salary<br>
