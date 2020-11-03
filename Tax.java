@@ -35,7 +35,7 @@ public class Tax {
     protected double calculateIncomeTax(int filingKey, double salary) {
         switch (filingKey) {
             case 1:
-                System.out.print("\nSingle.");
+                System.out.print("\nSingle. ");
                 if (salary > 1 && salary < 9700) {
                     incomeTax = .1;
                 } if (salary > 9700 && salary <= 39475) {
@@ -53,7 +53,7 @@ public class Tax {
                 }
                 break;
             case 2:
-                System.out.print("\nMarried Filing Jointly.");
+                System.out.print("\nMarried Filing Jointly. ");
                 if (salary > 1 && salary < 19400) {
                     incomeTax = .1;
                 } if (salary > 19400 && salary <= 78950) {
@@ -71,7 +71,7 @@ public class Tax {
                 }
                 break;
             case 3:
-                System.out.print("\nHead of Household.");
+                System.out.print("\nHead of Household. ");
                 if (salary > 1 && salary < 13850) {
                     incomeTax = .1;
                 } if (salary > 13850 && salary <= 52850) {
