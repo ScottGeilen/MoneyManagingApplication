@@ -32,7 +32,7 @@ public class MoneyManager {
                 System.out.println("1 - Calculate paycheck");
                 System.out.println("2 - Input spending from calculated paycheck");
                 System.out.println("3 - Input spending from start amount");
-                System.out.println("4 - Collect budget percentages");
+                System.out.println("4 - Calculate budget");
                 System.out.println("10 - Exit");
                 int menu = scan.nextInt();
                 switch (menu) {
