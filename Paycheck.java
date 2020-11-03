@@ -72,7 +72,20 @@ public class Paycheck {
         }
         calculatedPaycheckTax = subtotalPaycheck * incomeTax;
         calculatedPaycheck = subtotalPaycheck - calculatedPaycheckTax;
-
+        try {
+            FileWriter writer = new FileWriter("C:\\Users\\scott\\code\\projectslaptop02252020\\MoneyManagingApp\\paycheck.txt");
+            
+            writer.write(payFrequency);
+            writer.write("\nPaycheck frequency: " + payFrequency);
+            writer.write("\nPaycheck before tax: " + money.currencyFormat(subtotalPaycheck));
+            writer.write("\nIncome tax: " + incomeTax);
+            writer.write("\nPaycheck tax: " + money.currencyFormat(calculatedPaycheckTax));
+            writer.write("\nPaycheck after tax: " + money.currencyFormat(calculatedPaycheck));
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An Error occurred");
+            e.printStackTrace();
+        }
         System.out.println("\nAs a salaried employee:");
         System.out.println("- Your " + payFrequency + " paycheck before tax will be $" + money.currencyFormat(subtotalPaycheck));
         System.out.println("- Your " + payFrequency + " paycheck tax is $" + money.currencyFormat(calculatedPaycheckTax));

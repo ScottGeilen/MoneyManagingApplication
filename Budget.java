@@ -8,7 +8,7 @@ import java.text.*;
 import java.util.concurrent.TimeUnit;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.math.*;
 
@@ -78,6 +78,7 @@ public class Budget {
                         //paycheckLeft = calculatedPaycheck - budgetOfPaycheck;//"+budgetPercentage+"% or
                         //System.out.println("\npaycheck2 left after subtracting: " + paycheckLeft2);
                         System.out.println("You will allocate $"+money.currencyFormat(budgetMoney)+" for "+ budgetCategory);
+
                         scan.nextLine();
                         //System.out.println("\n\npaycheck2 left after allocating: " + paycheckLeft2);
                     }
