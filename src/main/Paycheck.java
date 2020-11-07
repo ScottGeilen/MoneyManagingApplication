@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+//import com.opencsv.CSVWriter;
 
 public class Paycheck {
     Scanner scan = new Scanner(System.in);
@@ -43,6 +44,7 @@ public class Paycheck {
     protected String payFormatted = "";
 
     protected Double calculateSalaryPaycheck() {
+        //CSVWriter writer = new CSVWriter(new FileWriter("C:\\Users\\scott\\code\\projectslaptop02252020\\MoneyManagingApp\\src\\helpers\\paycheck.txt"));
         salary = wage.getSalary();
         //csvWriter.append(salary);
         totalHours = hours.getTotalHours();
@@ -72,20 +74,27 @@ public class Paycheck {
         }
         calculatedPaycheckTax = subtotalPaycheck * incomeTax;
         calculatedPaycheck = subtotalPaycheck - calculatedPaycheckTax;
-        try {
-            FileWriter writer = new FileWriter("C:\\Users\\scott\\code\\projectslaptop02252020\\MoneyManagingApp\\docs\\paycheck.txt");
+        // try {
+            //FileWriter writer = new FileWriter("C:\\Users\\scott\\code\\projectslaptop02252020\\MoneyManagingApp\\src\\helpers\\paycheck.txt");
+            // System.out.println("Do you want to save this paycheck? y/n");
+            // String savePaycheck = scan.nextString();
+            // switch (savePaycheck) {
+            //     case "y":
+            //         String data[] = {payFrequency, };
+            //         writer.write("Paycheck frequency", "Before tax", "Income tax", "Calculated paycheck tax", "Calculated paycheck");
+            //         writer.write(payFrequency, subtotalPaycheck, incomeTax, calculatedPaycheckTax, calculatedPaycheck);
+            //         writer.writeNext(data);
+            //         writer.flush();
+            //         System.out.println("Paycheck saved.");
+            //         break;
+            //     case "n":
+            //         break;
+            // }
             
-            writer.write(payFrequency);
-            writer.write("\nPaycheck frequency: " + payFrequency);
-            writer.write("\nPaycheck before tax: " + money.currencyFormat(subtotalPaycheck));
-            writer.write("\nIncome tax: " + incomeTax);
-            writer.write("\nPaycheck tax: " + money.currencyFormat(calculatedPaycheckTax));
-            writer.write("\nPaycheck after tax: " + money.currencyFormat(calculatedPaycheck));
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("An Error occurred");
-            e.printStackTrace();
-        }
+        // } catch (IOException e) {
+        //     System.out.println("An Error occurred");
+        //     e.printStackTrace();
+        // }
         System.out.println("\nAs a salaried employee:");
         System.out.println("- Your " + payFrequency + " paycheck before tax will be $" + money.currencyFormat(subtotalPaycheck));
         System.out.println("- Your " + payFrequency + " paycheck tax is $" + money.currencyFormat(calculatedPaycheckTax));

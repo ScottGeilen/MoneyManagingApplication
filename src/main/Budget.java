@@ -3,6 +3,7 @@ import javax.swing.*;
 //import org.graalvm.compiler.replacements.arraycopy.PluginFactory_CheckcastArrayCopyCallNode;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.time.*;
 import java.text.*;
 import java.util.concurrent.TimeUnit;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.math.*;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Budget {
     Scanner scan = new Scanner(System.in);
@@ -93,9 +96,14 @@ public class Budget {
         }
         System.out.println("\nWith a total paycheck of $" + money.currencyFormat(calculatedPaycheck)+", your budget consists of:");
         for (Map.Entry<String, Double> e : budgetList.entrySet()) {
-            System.out.println("Category: " + e.getKey());
-            System.out.println("Amount: $" + e.getValue());
+            System.out.println("$" + e.getValue() + " is allocated for " + e.getKey());
         }
+        // LinkedHashMap<String, Double> sortedBudgetList = new LinkedHashMap<>();
+        // budgetList.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).forEachOrdered(x -> sortedBudgetList.put(x.getKey(), x.getValue()));
+        //LinkedHashMap<String, Double> sortedBudgetList = new LinkedHashMap<>();
+        //budgetList.entrySet().stream().sorted(Map.Entry.comparingByValue())-> sortedBudgetList.put(x.getKey(), x.getValue()));
+        //System.out.println(budgetList);
         return budgetCategory;
     }
+
 }
