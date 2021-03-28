@@ -7,11 +7,21 @@ import java.util.concurrent.TimeUnit;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+import javax.swing.JFrame;
 
 public class MoneyManager {
     public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                JFrame frame = new JFrame("Hello World Swing!");
+                frame.setSize(500, 400);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+            }
+        });
         menu();
     }
+
     public static void menu() {
         Scanner scan = new Scanner(System.in);
         boolean exit = false;
@@ -36,49 +46,46 @@ public class MoneyManager {
                 System.out.println("10 - Exit");
                 int menu = scan.nextInt();
                 switch (menu) {
-                    case 1:
-                        paycheck.calculatePaycheck();
-                        break;
-                    case 2:
-                        paycheck.calculatePaycheckPurchases();
-                        break;
-                    case 3:
-                        paycheck.addSpending();
-                        break;
-                    case 4:
-                        budget.collectBudget();
-                        break;
-                    case 10:
-                        if (scan != null)
-                            scan.close();
-                        exit = true;
-                        break;
+                case 1:
+                    paycheck.calculatePaycheck();
+                    break;
+                case 2:
+                    paycheck.calculatePaycheckPurchases();
+                    break;
+                case 3:
+                    paycheck.addSpending();
+                    break;
+                case 4:
+                    budget.collectBudget();
+                    break;
+                case 10:
+                    if (scan != null)
+                        scan.close();
+                    exit = true;
+                    break;
                 }
             } finally {
                 System.out.println("");
             }
         }
-    }   
+    }
+
     protected String currencyFormat(Double num) {
         DecimalFormat df = new DecimalFormat("#,###.00");
         String newestFormatted = df.format(num);
         return newestFormatted;
     }
-    
+
     /*
-    
-    TO-DO LIST
-    1. 
-        Your bi-weekly paycheck is $230.76.
-
-        Enter amount in your checking account: $939
-
-        You will have $1169.76 in your checking account when your paycheck arrives
-
-        ***Tip: Exit by '.123'.
-        How much is your purchase? $200
-
-        You will spend $200.00.
-        You will have a remaining balance of $969.76.
-    */
+     * 
+     * TO-DO LIST 1. Your bi-weekly paycheck is $230.76.
+     * 
+     * Enter amount in your checking account: $939
+     * 
+     * You will have $1169.76 in your checking account when your paycheck arrives
+     *** 
+     * Tip: Exit by '.123'. How much is your purchase? $200
+     * 
+     * You will spend $200.00. You will have a remaining balance of $969.76.
+     */
 }
