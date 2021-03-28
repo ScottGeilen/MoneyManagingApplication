@@ -7,18 +7,13 @@ import java.util.concurrent.TimeUnit;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
 
 public class MoneyManager {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new JFrame("Hello World Swing!");
-                frame.setSize(500, 400);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setVisible(true);
-            }
-        });
+        GUI();
         menu();
     }
 
@@ -74,6 +69,19 @@ public class MoneyManager {
         DecimalFormat df = new DecimalFormat("#,###.00");
         String newestFormatted = df.format(num);
         return newestFormatted;
+    }
+
+    public static void GUI() {
+        JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createEmptyBorder(300, 300, 100, 300));
+        panel.setLayout(new GridLayout(0, 1));
+
+        frame.add(panel, BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("--$$$--  Money Manager  --$$$--");
+        frame.pack();
+        frame.setVisible(true);
     }
 
     /*
