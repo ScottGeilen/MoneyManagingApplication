@@ -74,8 +74,17 @@ public class MoneyManager {
     public static void GUI() {
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
+        JButton button1 = new JButton("Calculate Paycheck");
+        JButton button2 = new JButton("Input spending from calculated paycheck");
+        JButton button3 = new JButton("Input spending from start amount");
+        JButton button4 = new JButton("Calculate approximate budget");
+
         panel.setBorder(BorderFactory.createEmptyBorder(300, 300, 100, 300));
         panel.setLayout(new GridLayout(0, 1));
+        panel.add(button1);
+        panel.add(button2);
+        panel.add(button3);
+        panel.add(button4);
 
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
